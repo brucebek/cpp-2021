@@ -29,9 +29,16 @@ public:
 };
 
 
-class EmptyStack : public CalculatorException {
+class InvalidArgument: public CalculatorException {
 public:
     int code = 4;
+    const char * what() const noexcept override;
+};
+
+
+class EmptyStack : public CalculatorException {
+public:
+    int code = 5;
     const char * what() const noexcept override;
 };
 

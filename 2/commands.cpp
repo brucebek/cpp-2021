@@ -26,13 +26,23 @@ void Pop::run()
 }
 
 
+bool is_number(const std::string &s)
+{
+    for(uint32_t i = 0; i < s.size(); i++)
+    {
+        if(i == 0 && (s[i] == '-' || s[i] == '+') && s.size() != 1) continue;
+        if(s[i] < 48 || s[i] > 57) return false;
+    }
+    return true;
+}
+
 bool is_varname(const std::string &s)
 {
     for(const char &c: s)
     {
-        if(c < 65 || (c > 90  && c < 97) || c > 122) return 0;
+        if(c < 65 || (c > 90  && c < 97) || c > 122) return false;
     }
-    return 1;
+    return true;
 }
 
 
@@ -41,21 +51,17 @@ Push::Push(Calculator &ctx, const std::string &arg) : Command{ctx}, _arg{arg}
 }
 void Push::run()
 {
-    try {
-
+    if(is_number(_arg))
+    {
         _ctx.stack.push(std::stoi(_arg));
     }
-    catch(std::invalid_argument &e)
+    else if (is_varname(_arg))
     {
-        if(is_varname(_arg))
-        {
-            _ctx.stack.push(_ctx.vars.at(_arg));
-        }
-        else
-        {
-            throw;
-        }
-
+        _ctx.stack.push(_ctx.vars.at(_arg));
+    }
+    else
+    {
+        throw InvalidArgument();
     }
 }
 
@@ -70,7 +76,7 @@ void Peek::run()
     }
     else
     {
-        throw std::invalid_argument("The calculator cannot recognize this argument.");
+        throw InvalidArgument();
     }
 
 }

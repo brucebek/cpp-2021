@@ -22,7 +22,7 @@ add_executable(calculator
 
 if (MSVC)
     target_compile_options(calculator
-            PRIVATE /W3          # warnings level
+            PRIVATE /W4          # warnings level
             PRIVATE /WX          # treat all warnings as errors
             )
 else()
