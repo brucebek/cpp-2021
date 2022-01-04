@@ -21,12 +21,12 @@ add_executable(calculator
         )
 
 if (MSVC)
-    target_compile_options(hasher
+    target_compile_options(calculator
             PRIVATE /W4          # warnings level
             PRIVATE /WX          # treat all warnings as errors
             )
 else()
-    target_compile_options(hasher
+    target_compile_options(calculator
             PRIVATE -Wall        # basic set of warnings
             PRIVATE -pedantic    # modern C++ inspections
             PRIVATE -Werror      # treat all warnings as errors

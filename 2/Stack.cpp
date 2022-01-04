@@ -13,7 +13,7 @@ int64_t Stack::pop()
         return temp;
     }
     throw EmptyStack();
-};
+}
 
 int64_t Stack::top()
 {
@@ -21,9 +21,9 @@ int64_t Stack::top()
         return stack.back();
     }
     throw EmptyStack();
-};
+}
 
 void Stack::push(int64_t x)
 {
     stack.push_back(x);
-};
+}
