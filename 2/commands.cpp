@@ -53,7 +53,7 @@ void Push::run()
         }
         else
         {
-            throw  std::invalid_argument("The calculator cannot recognize this argument.");
+            throw;
         }
 
     }
