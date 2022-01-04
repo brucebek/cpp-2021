@@ -15,12 +15,6 @@ const char * UnexpectedCommand::what() const noexcept {
     return "Unexpected command of the calculator.";
 }
 
-
-const char * InvalidArgument::what() const noexcept {
-    return "The calculator cannot recognize this argument.";
-}
-
-
 const char * EmptyStack::what() const noexcept {
     return "The stack of the calculator is empty.";
 }

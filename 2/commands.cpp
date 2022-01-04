@@ -26,16 +26,6 @@ void Pop::run()
 }
 
 
-bool is_number(const std::string &s)
-{
-    for(const char &c: s)
-    {
-        if(c < 48 || c > 58) return 0;
-    }
-    return 1;
-}
-
-
 bool is_varname(const std::string &s)
 {
     for(const char &c: s)
@@ -51,17 +41,21 @@ Push::Push(Calculator &ctx, const std::string &arg) : Command{ctx}, _arg{arg}
 }
 void Push::run()
 {
-    if(is_number(_arg))
-    {
+    try {
+
         _ctx.stack.push(std::stoi(_arg));
     }
-    else if(is_varname(_arg))
+    catch(std::invalid_argument &e)
     {
-        _ctx.stack.push(_ctx.vars.at(_arg));
-    }
-    else
-    {
-        throw InvalidArgument();
+        if(is_varname(_arg))
+        {
+            _ctx.stack.push(_ctx.vars.at(_arg));
+        }
+        else
+        {
+            throw  std::invalid_argument("The calculator cannot recognize this argument.");
+        }
+
     }
 }
 
@@ -76,7 +70,7 @@ void Peek::run()
     }
     else
     {
-        throw InvalidArgument();
+        throw std::invalid_argument("The calculator cannot recognize this argument.");
     }
 
 }
@@ -105,7 +99,9 @@ Minus::Minus(Calculator &ctx) : Command{ctx}
 }
 void Minus::run()
 {
-    _ctx.stack.push(_ctx.stack.pop() - _ctx.stack.pop());
+    int64_t a = _ctx.stack.pop();
+    int64_t b = _ctx.stack.pop();
+    _ctx.stack.push(b - a);
 }
 
 
@@ -123,7 +119,9 @@ Div::Div(Calculator &ctx) : Command{ctx}
 }
 void Div::run()
 {
-    _ctx.stack.push(_ctx.stack.pop() / _ctx.stack.pop());
+    int64_t a = _ctx.stack.pop();
+    int64_t b = _ctx.stack.pop();
+    _ctx.stack.push(b / a);
 }
 
 
