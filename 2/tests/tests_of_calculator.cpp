@@ -17,8 +17,8 @@ TEST(Calculator, PLUSIntOverflow) {
 }
 
 TEST(Calculator, MINUSIntOverflow) {
-    std::stringstream commands{"PUSH 9223372036854775800\n"
-                           "PUSH 9223372036854775800\n"
+    std::stringstream commands{"PUSH -1000\n"
+                           "PUSH 9223372036854775807\n"
                            "MINUS"};
     EXPECT_THROW(run_commands(commands), IntOverflow);
 }
