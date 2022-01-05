@@ -18,6 +18,7 @@ TEST(Calculator, PLUSIntOverflow) {
 }
 
 TEST(Calculator, MINUSIntOverflow) {
+    std::cerr << std::numeric_limits<int64_t>::min();
     std::stringstream commands{"PUSH -9223372036854775808\n"
                            "PUSH 9223372036854775807\n"
                            "MINUS"};
