@@ -92,4 +92,6 @@ public:
 };
 
 Command* make_command(Calculator &calculator, const std::string &command, const std::string &arg);
+
+void run_commands(std::istream &input);
 #endif //CPP_2021_COMMANDS_H

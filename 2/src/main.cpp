@@ -1,18 +1,7 @@
 #include <fstream>
 #include "Calculator.h"
+#include "commands.h"
 #include "exceptions.h"
-
-
-void run_commands(std::istream &input)
-{
-    Calculator calculator;
-    std::string raw_command;
-    while(std::getline(input, raw_command))
-    {
-        calculator.perform(raw_command);
-    }
-
-}
 
 
 int main(int argc, char *argv[]){

@@ -7,6 +7,7 @@
 
 #include "Stack.h"
 
+
 class Calculator{
 public:
     Stack stack;

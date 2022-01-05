@@ -1,7 +1,6 @@
 #ifndef CPP_2021_EXCEPTIONS_H
 #define CPP_2021_EXCEPTIONS_H
 #include <exception>
-#include "SafeInt.hpp"
 
 class CalculatorException : public std::exception {
 public:

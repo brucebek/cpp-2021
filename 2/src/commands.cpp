@@ -219,3 +219,15 @@ Command* make_command(Calculator &calculator, const std::string &command, const 
     }
     throw UnexpectedCommand();
 }
+
+
+void run_commands(std::istream &input)
+{
+    Calculator calculator;
+    std::string raw_command;
+    while(std::getline(input, raw_command))
+    {
+        calculator.perform(raw_command);
+    }
+
+}
