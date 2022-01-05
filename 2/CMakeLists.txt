@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+find_path(SAFEINT_INCLUDE_DIRS "SafeInt.hpp")
+
 add_executable(calculator
         main.cpp
         commands.h
@@ -20,7 +22,6 @@ add_executable(calculator
         exceptions.cpp
         )
 
-find_path(SAFEINT_INCLUDE_DIRS "SafeInt.hpp")
 target_include_directories(calculator PRIVATE ${SAFEINT_INCLUDE_DIRS})
 
 if (MSVC)
