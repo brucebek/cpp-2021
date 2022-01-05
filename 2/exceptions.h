@@ -1,11 +1,7 @@
-//
-// Created by brucebek on 04.01.2022.
-//
-
 #ifndef CPP_2021_EXCEPTIONS_H
 #define CPP_2021_EXCEPTIONS_H
 #include <exception>
-
+#include "SafeInt.hpp"
 
 class CalculatorException : public std::exception {
 public:
@@ -42,4 +38,27 @@ public:
     const char * what() const noexcept override;
 };
 
+
+class IntOverflow : public CalculatorException {
+public:
+    int code = 6;
+    const char * what() const noexcept override;
+};
+
+
+class DivByZero : public CalculatorException {
+public:
+    int code = 7;
+    const char * what() const noexcept override;
+};
+
+
+class CalculatorSafeIntExceptionHandler
+{
+public:
+
+    static void SafeIntOnOverflow();
+
+    static void SafeIntOnDivZero();
+};
 #endif //CPP_2021_EXCEPTIONS_H

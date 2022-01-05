@@ -1,7 +1,3 @@
-//
-// Created by brucebek on 03.01.2022.
-//
-
 #ifndef CPP_2021_COMMANDS_H
 #define CPP_2021_COMMANDS_H
 

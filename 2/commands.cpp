@@ -1,9 +1,7 @@
-//
-// Created by brucebek on 03.01.2022.
-//
 #include <iostream>
 #include "commands.h"
 #include "exceptions.h"
+#include "SafeInt.hpp"
 
 Command::Command(Calculator &ctx) : _ctx{ctx}
 {
@@ -53,7 +51,15 @@ void Push::run()
 {
     if(is_number(_arg))
     {
-        _ctx.stack.push(std::stoi(_arg));
+        try
+        {
+            _ctx.stack.push(std::stoll(_arg));
+        }
+        catch (std::out_of_range)
+        {
+            throw IntOverflow();
+        }
+
     }
     else if (is_varname(_arg))
     {
@@ -96,7 +102,7 @@ Plus::Plus(Calculator &ctx) : Command{ctx}
 }
 void Plus::run()
 {
-    _ctx.stack.push(_ctx.stack.pop() + _ctx.stack.pop());
+    _ctx.stack.push(SafeInt<int64_t, CalculatorSafeIntExceptionHandler>(_ctx.stack.pop()) + _ctx.stack.pop());
 }
 
 
@@ -105,7 +111,7 @@ Minus::Minus(Calculator &ctx) : Command{ctx}
 }
 void Minus::run()
 {
-    int64_t a = _ctx.stack.pop();
+    SafeInt<int64_t, CalculatorSafeIntExceptionHandler> a = _ctx.stack.pop();
     int64_t b = _ctx.stack.pop();
     _ctx.stack.push(b - a);
 }
@@ -116,7 +122,7 @@ Mul::Mul(Calculator &ctx) : Command{ctx}
 }
 void Mul::run()
 {
-    _ctx.stack.push(_ctx.stack.pop() * _ctx.stack.pop());
+    _ctx.stack.push(SafeInt<int64_t, CalculatorSafeIntExceptionHandler>(_ctx.stack.pop()) * _ctx.stack.pop());
 }
 
 
@@ -125,7 +131,7 @@ Div::Div(Calculator &ctx) : Command{ctx}
 }
 void Div::run()
 {
-    int64_t a = _ctx.stack.pop();
+    SafeInt<int64_t, CalculatorSafeIntExceptionHandler> a = _ctx.stack.pop();
     int64_t b = _ctx.stack.pop();
     _ctx.stack.push(b / a);
 }
@@ -145,9 +151,23 @@ Read::Read(Calculator &ctx) : Command{ctx}
 }
 void Read::run()
 {
-    int64_t temp;
+    std::string temp;
     std::cin >> temp;
-    _ctx.stack.push(temp);
+    if(is_number(temp))
+    {
+        try
+        {
+            _ctx.stack.push(std::stoll(temp));
+        }
+        catch (std::out_of_range)
+        {
+            throw IntOverflow();
+        }
+    }
+    else
+    {
+        throw InvalidArgument();
+    }
 }
 
 

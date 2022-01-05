@@ -24,8 +24,12 @@ int main(int argc, char *argv[]){
         }
         else if(argc == 2)
         {
-            std::ifstream input(argv[1]);
-            run_commands(input);
+
+            std::ifstream file;
+            file.exceptions ( std::ifstream::badbit );
+            file.open(argv[1]);
+            run_commands(file);
+            file.close();
         }
         else
         {
