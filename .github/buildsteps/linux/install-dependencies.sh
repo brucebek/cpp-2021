@@ -6,3 +6,5 @@ trap '[[ $BASH_COMMAND != echo* ]] && echo $BASH_COMMAND' DEBUG
 cd "$LAB_INDEX" || exit $?
 
 vcpkg --version || exit $?
+
+vcpkg install safeint || exit $?
