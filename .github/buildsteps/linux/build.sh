@@ -13,7 +13,7 @@ make --version                                                               || 
 echo
 echo '================================== BUILD Debug ==================================='
 cmake -E rm -rf 'debug'                                                      || exit $?
-cmake -G 'Unix Makefiles' -D 'CMAKE_BUILD_TYPE=Debug' -B 'debug' -S '..'     || exit $?
+cmake -G 'Unix Makefiles' -D 'CMAKE_BUILD_TYPE=Debug' 'CMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake' -B 'debug' -S '..'     || exit $?
 echo
 cmake --build 'debug'                                                        || exit $?
 
