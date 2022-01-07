@@ -111,9 +111,9 @@ Minus::Minus(Calculator &ctx) : Command{ctx}
 }
 void Minus::run()
 {
-    SafeInt<int64_t, CalculatorSafeIntExceptionHandler> a = _ctx.stack.pop();
+    int64_t a = _ctx.stack.pop();
     int64_t b = _ctx.stack.pop();
-    _ctx.stack.push(b - a);
+    _ctx.stack.push(SafeInt<int64_t, CalculatorSafeIntExceptionHandler>(b) - a);
 }
 
 
@@ -131,9 +131,9 @@ Div::Div(Calculator &ctx) : Command{ctx}
 }
 void Div::run()
 {
-    SafeInt<int64_t, CalculatorSafeIntExceptionHandler> a = _ctx.stack.pop();
+    a = _ctx.stack.pop();
     int64_t b = _ctx.stack.pop();
-    _ctx.stack.push(b / a);
+    _ctx.stack.push(SafeInt<int64_t, CalculatorSafeIntExceptionHandler>(b) / a);
 }
 
 
