@@ -131,7 +131,7 @@ Div::Div(Calculator &ctx) : Command{ctx}
 }
 void Div::run()
 {
-    a = _ctx.stack.pop();
+    int64_t a = _ctx.stack.pop();
     int64_t b = _ctx.stack.pop();
     _ctx.stack.push(SafeInt<int64_t, CalculatorSafeIntExceptionHandler>(b) / a);
 }
